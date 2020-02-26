@@ -1,0 +1,27 @@
+.href-normal {
+    color: black;
+    text-decoration: none;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.href-normal:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.row_height {
+    heights: 120px;
+}
+
+/*a:active {
+  color: black;
+}
+
+a:visited {
+  color: purple;
+}*/
