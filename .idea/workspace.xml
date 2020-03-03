@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fc62758-28d3-4b7b-a457-46ef5dfa35fc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/newsScrapper/category.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newsScrapper/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/newsScrapper/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newsScrapper/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/newsScrapper/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/newsScrapper/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/newsScrapper/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/newsScrapper/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/newsScrapper/base.html" afterDir="false" />
     </list>
