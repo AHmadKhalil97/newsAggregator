@@ -2,11 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fc62758-28d3-4b7b-a457-46ef5dfa35fc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/newsScrapper/category.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newsScrapper/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/newsScrapper/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newsScrapper/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/newsScrapper/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newsScrapper/migrations/0002_remove_headlines_image.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newsScrapper/migrations/0003_auto_20200220_2004.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newsScrapper/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/newsScrapper/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/newsScrapper/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/newsScrapper/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/newsScrapper/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/newsScrapper/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/newsScrapper/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/newsScrapper/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/newsScrapper/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/newsScrapper/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/newsScrapper/news.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/newsScrapper/news.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

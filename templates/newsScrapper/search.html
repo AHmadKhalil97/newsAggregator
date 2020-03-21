@@ -3,13 +3,10 @@
 
 {% block news_block %}
   <div class="container">
-    {% if query %}
-    <h1 class="display-4"><em>Search results for <mark>'{{ query }}'</mark>: </em></h1>
-    {% endif %}
     <div class="row">
       {% for news in news_all %}
-        {% if news.news_count > 0 %}
-          <div class="col-md-4">
+        <div class="col-md-4">
+          {% if news.news_count > 0 %}
             <a class="href-normal" href="{{ news.source_url }}" target="_blank"><h2 class="text-center">{{ news.source }}</h2></a>
             {% if news.news_count > 5 %}
               <ul class="list-group list-group-flush">
@@ -40,14 +37,13 @@
               </div>
             {% else %}
               <ul class="list-group list-group-flush">
-                <li class="list-group-item"><small class="text-muted"><em>Dated: {{ news.update_date }}</em></small></li>
                 {% for i in news.news_list %}
                   <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="{{ i.title }}"><a class="href-normal" href="{{ i.link }}" target="_blank">{{ i.title }}</a></li>
                 {% endfor %}
               </ul>
             {% endif %}
-          </div>
-        {% endif %}
+          {%endif%}
+        </div>
       {% endfor %}
     </div>
   </div>
