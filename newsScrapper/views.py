@@ -55,7 +55,7 @@ def search(request):
         for source in Source.objects.all():
             source_name = source.source_name
             source_link = source.source_link
-            update_date = source.updated_date
+            update_datetime = source.updated_datetime
             news_list = Headline.objects.filter(source=source, title__contains=query)
 
             news_count = len(news_list)
@@ -63,14 +63,14 @@ def search(request):
                 dict = {'source': source_name,
                         'source_url': source_link,
                         'news_count': news_count,
-                        'update_date': update_date,
+                        'update_datetime': update_datetime,
                         'top_news': news_list[:5],
                         'news_list': news_list[5:]}
             else:
                 dict = {'source': source_name,
                         'source_url': source_link,
                         'news_count': news_count,
-                        'update_date': update_date,
+                        'update_datetime': update_datetime,
                         'news_list': news_list}
 
             news_all.append(dict)
