@@ -8,7 +8,7 @@ class Source(models.Model):
     source_name = models.CharField(max_length=100)
     source_link = models.TextField()
     source_category = models.CharField(max_length=100)
-    updated_date = models.DateField(default=timezone.now)
+    updated_datetime = models.DateTimeField(default=timezone.now)
 
 
 class Headline(models.Model):

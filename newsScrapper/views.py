@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
+from django.utils import timezone
 
 from .models import Source, Headline
 
@@ -16,22 +17,23 @@ def get_all(request, category='latest'):
     for source in Source.objects.filter(source_category=category):
         source_name = source.source_name
         source_link = source.source_link
-        update_date = source.updated_date
+        update_datetime = source.updated_datetime
         news_list = Headline.objects.filter(source=source)
 
         news_count = len(news_list)
+        print(news_count)
         if news_count > 5:
             dict = {'source': source_name,
                     'source_url': source_link,
                     'news_count': news_count,
-                    'update_date': update_date,
+                    'update_datetime': update_datetime,
                     'top_news': news_list[:5],
                     'news_list': news_list[5:]}
         else:
             dict = {'source': source_name,
                     'source_url': source_link,
                     'news_count': news_count,
-                    'update_date': update_date,
+                    'update_datetime': update_datetime,
                     'news_list': news_list}
 
         news_all.append(dict)
@@ -43,7 +45,7 @@ def sync_now(request):
     scrap_all_politics()
     scrap_all_business()
     scrap_all_health()
-    get_all(request, 'latest')
+    # get_all(request, 'latest')
 
 
 def search(request):
@@ -109,7 +111,8 @@ def save_all(news_all, category):
             source_obj, created = Source.objects.get_or_create(
                 source_name=source.get('source'),
                 source_link=source.get('source_url'),
-                source_category=category
+                source_category=category,
+                updated_datetime=timezone.now()
             )
             if created:
                 for news in source.get('news_list'):
