@@ -3,6 +3,10 @@ import requests
 from bs4 import BeautifulSoup
 from django.utils import timezone
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import SourceSerializer
+
 from .models import Source, Headline
 
 # import tweepy
@@ -11,6 +15,12 @@ requests.packages.urllib3.disable_warnings()
 
 
 # Create your views here.
+
+class NewsAggregatorApi(APIView):
+    def get(self, request, *args, **kwargs):
+        sources = Source.objects.all()
+        serializer = SourceSerializer(sources, many=True)
+        return Response(serializer.data)
 
 def get_all(request, category='latest'):
     news_all = []
@@ -41,6 +51,7 @@ def get_all(request, category='latest'):
 
 
 def sync_now(request):
+    Source.objects.all().delete()
     scrap_all_latest()
     scrap_all_politics()
     scrap_all_business()
@@ -111,8 +122,7 @@ def save_all(news_all, category):
             source_obj, created = Source.objects.get_or_create(
                 source_name=source.get('source'),
                 source_link=source.get('source_url'),
-                source_category=category,
-                updated_datetime=timezone.now()
+                source_category=category
             )
             if created:
                 for news in source.get('news_list'):
