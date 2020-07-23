@@ -5,7 +5,7 @@ from django.utils import timezone
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import SourceSerializer
+from .serializers import SourceSerializer, HeadlineSerializer
 
 from .models import Source, Headline
 
@@ -16,11 +16,31 @@ requests.packages.urllib3.disable_warnings()
 
 # Create your views here.
 
-class NewsAggregatorApi(APIView):
-    def get(self, request, category='latest', *args, **kwargs):
+class GetDataAPI(APIView):
+    def get(self, request, category='latest' , *args, **kwargs):
         sources = Source.objects.filter(source_category=category)
-        serializer = SourceSerializer(sources, many=True)
-        return Response(serializer.data)
+        if not sources:
+                data = {
+                    'success': False,
+                    'msg': 'There\'s no sources matching your category',
+                }
+                return Response(data)
+        else:
+            serializer = SourceSerializer(sources, many=True)
+            return Response(serializer.data)
+
+class SearchAPI(APIView):
+    def get(self, request, query, *args, **kwargs):
+        headlines = Headline.objects.filter(title__contains=query)
+        if not headlines:
+                data = {
+                    'success': False,
+                    'msg': 'There\'s no headlines matching your keyword',
+                }
+                return Response(data)
+        else:
+            serializer = HeadlineSerializer(headlines, many=True)
+            return Response(serializer.data)
 
 def get_all(request, category='latest'):
     news_all = []
