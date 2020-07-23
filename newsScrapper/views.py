@@ -17,8 +17,8 @@ requests.packages.urllib3.disable_warnings()
 # Create your views here.
 
 class NewsAggregatorApi(APIView):
-    def get(self, request, *args, **kwargs):
-        sources = Source.objects.all()
+    def get(self, request, category='latest', *args, **kwargs):
+        sources = Source.objects.filter(source_category=category)
         serializer = SourceSerializer(sources, many=True)
         return Response(serializer.data)
 
