@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import requests
 from bs4 import BeautifulSoup
 from django.utils import timezone
@@ -42,7 +42,7 @@ class SearchAPI(APIView):
             serializer = HeadlineSerializer(headlines, many=True)
             return Response(serializer.data)
 
-def getAllByCategory(category):
+def get_all(request, category='latest'):
     news_all = []
     for source in Source.objects.filter(source_category=category):
         source_name = source.source_name
@@ -66,10 +66,7 @@ def getAllByCategory(category):
                     'news_list': news_list}
 
         news_all.append(dict)
-    return news_all
-
-def get_all(request, category='latest'):
-    return render(request, 'newsScrapper/news.html', {'news_all': getAllByCategory(category)})
+    return render(request, 'newsScrapper/news.html', {'news_all': news_all})
 
 
 def sync_now(request):
@@ -78,7 +75,7 @@ def sync_now(request):
     scrap_all_politics()
     scrap_all_business()
     scrap_all_health()
-    return render(request, 'newsScrapper/news.html', {'news_all': getAllByCategory('latest')})
+    return redirect('/')
 
 
 def search(request):
