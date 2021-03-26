@@ -42,7 +42,7 @@ class SearchAPI(APIView):
             serializer = HeadlineSerializer(headlines, many=True)
             return Response(serializer.data)
 
-def get_all(request, category='latest'):
+def getAllByCategory(category):
     news_all = []
     for source in Source.objects.filter(source_category=category):
         source_name = source.source_name
@@ -51,7 +51,6 @@ def get_all(request, category='latest'):
         news_list = Headline.objects.filter(source=source)
 
         news_count = len(news_list)
-        print(news_count)
         if news_count > 5:
             dict = {'source': source_name,
                     'source_url': source_link,
@@ -67,7 +66,10 @@ def get_all(request, category='latest'):
                     'news_list': news_list}
 
         news_all.append(dict)
-    return render(request, 'newsScrapper/news.html', {'news_all': news_all})
+    return news_all
+
+def get_all(request, category='latest'):
+    return render(request, 'newsScrapper/news.html', {'news_all': getAllByCategory(category)})
 
 
 def sync_now(request):
@@ -76,7 +78,7 @@ def sync_now(request):
     scrap_all_politics()
     scrap_all_business()
     scrap_all_health()
-    # get_all(request, 'latest')
+    return render(request, 'newsScrapper/news.html', {'news_all': getAllByCategory('latest')})
 
 
 def search(request):
@@ -284,9 +286,7 @@ def scrap_cnn():
     content = session.get(req_url, verify=False).text.replace('\\', '').replace('\"', '')
     try:
         soup = BeautifulSoup(content, 'lxml')
-        # print(soup.select('article h3'))
         rows = soup.select('article h3')
-        # print(rows)
         news_list = []
         for i in rows:
             if i.find('span', {'class': 'cd__headline-text'}) and i.find('a'):

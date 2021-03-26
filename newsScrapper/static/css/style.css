@@ -18,6 +18,10 @@
     heights: 120px;
 }
 
+.jumbotron {
+  background: #dfe3ee;
+}
+
 /*a:active {
   color: black;
 }

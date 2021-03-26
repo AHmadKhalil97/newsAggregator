@@ -2,54 +2,66 @@
 {% load static %}
 
 {% block news_block %}
-  <div class="container">
-    {% if query %}
-    <h1 class="display-4"><em>Search results for <mark>'{{ query }}'</mark>: </em></h1>
-    {% endif %}
-    <div class="row">
-      {% for news in news_all %}
-        {% if news.news_count > 0 %}
-          <div class="col-md-4">
-            <a class="href-normal" href="{{ news.source_url }}" target="_blank"><h2 class="text-center">{{ news.source }}</h2></a>
-            {% if news.news_count > 5 %}
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"><small class="text-muted"><em>Dated: {{ news.update_datetime }}</em></small></li>
-                {% for i in news.top_news %}
-                  <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="{{ i.title }}"><a class="href-normal" href="{{ i.link }}" target="_blank">{{ i.title }}</a></li>
-                {% endfor %}
-              </ul>
-              <div class="panel-group" role="tablist">
-                <div class="panel panel-default">
-                  <div id="{{ news.source }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading1">
-                    <ul class="list-group list-group-flush">
-                      {% for i in news.news_list %}
-                        <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="{{ i.title }}"><a class="href-normal" href="{{ i.link }}" target="_blank">{{ i.title }}</a></li>
-                      {% endfor %}
-                    </ul>
-                  </div>
-                  <div class="panel-heading" role="tab" id="collapseListGroupHeading1">
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="{{ i.title }}">
-                        <a class="collapsed" data-toggle="collapse" href="#{{ news.source }}" aria-expanded="false" aria-controls="collapseListGroup1">
-                          (show/hide more)
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            {% else %}
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"><small class="text-muted"><em>Dated: {{ news.update_datetime }}</em></small></li>
-                {% for i in news.news_list %}
-                  <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="{{ i.title }}"><a class="href-normal" href="{{ i.link }}" target="_blank">{{ i.title }}</a></li>
-                {% endfor %}
-              </ul>
-            {% endif %}
+<div class="container">
+  {% if query %}
+  <h1 class="display-4"><em>Search results for <mark>'{{ query }}'</mark>: </em></h1>
+  {% endif %}
+  <div class="row row-eq-height">
+    {% for news in news_all %}
+    {% if news.news_count > 0 %}
+    <div class="col-lg-4 col-md-6 col-sm-12">
+
+
+      <div class="card border-secondary mb-3">
+        <div class="card-header bg-transparent">
+          <a class="href-normal" href="{{ news.source_url }}" target="_blank">
+            <h2 class="text-center">{{ news.source }}</h2>
+          </a>
+        </div>
+        <div class="card-body">
+          <!-- <h5 class="card-title">Success card title</h5> -->
+          <!-- <a class="href-normal" href="{{ news.source_url }}" target="_blank"><h2 class="text-center">{{ news.source }}</h2></a> -->
+          {% if news.news_count > 5 %}
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><small class="text-muted"><em>Dated: {{ news.update_datetime }}</em></small>
+            </li>
+            {% for i in news.top_news %}
+            <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="{{ i.title }}"><a
+                class="href-normal" href="{{ i.link }}" target="_blank">{{ i.title }}</a></li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><small class="text-muted"><em>Dated: {{ news.update_datetime }}</em></small>
+            </li>
+            {% for i in news.news_list %}
+            <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="{{ i.title }}"><a
+                class="href-normal" href="{{ i.link }}" target="_blank">{{ i.title }}</a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        {% if news.news_count > 5 %}
+        <div class="card-footer bg-transparent">
+          <a class="href-normal text-center" data-toggle="collapse" href="#{{news.source}}" role="button" aria-expanded="false"
+            aria-controls="{{news.source}}">
+            (show/hide more)
+          </a>
+          <div class="collapse" id="{{news.source}}">
+            <ul class="list-group list-group-flush">
+              {% for i in news.news_list %}
+              <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="{{ i.title }}"><a
+                  class="href-normal" href="{{ i.link }}" target="_blank">{{ i.title }}</a></li>
+              {% endfor %}
+            </ul>
           </div>
+        </div>
         {% endif %}
-      {% endfor %}
+      </div>
     </div>
+    {% endif %}
+    {% endfor %}
   </div>
+</div>
 
 {% endblock %}
