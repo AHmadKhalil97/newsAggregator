@@ -5,6 +5,7 @@ Through this news aggregator, you can see all the latest news of multiple top we
 
 ```
 > conda create --name <envName> numpy pip
+> conda activate <envName>
 > pip install django bs4 requests pillow lxml djangorestframework
 > python manage.py migrate
 > python manage.py makemigrations
